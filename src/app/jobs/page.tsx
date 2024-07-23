@@ -1,25 +1,19 @@
-import { JobDataBuilder } from "@/utils/job-data-builder";
-import { Button, Card, Flex, Grid, Group, Paper, SimpleGrid, Stack, Text, Title } from "@mantine/core";
-import jobs from "../constants/jobs.data";
-import Link from "next/link";
+import { Flex, Title } from "@mantine/core";
+import JobCard from "@/components/ui/job-card";
+import axios from "@/lib/axios";
+import { Job } from "../../../types/job";
 
-export default function Page() {
+export default async function Page() {
+  const res = await axios.get<Job[]>("/jobs");
+  const jobs = res.data;
   return (
     <>
-      <Title pb={34} order={1}>Recommended jobs      </Title>
+      <Title pb={34} order={1}>
+        Recommended jobs{" "}
+      </Title>
       <Flex direction="column" gap="lg" justify={{ sm: "center" }}>
         {jobs.map((job) => (
-          <Paper key={job.id} shadow="xs" p={20} radius="lg" withBorder>
-            <Group justify="space-between">
-              <Stack>
-                <Title order={3}>{job.title}</Title>
-                <Text size="sm">{job.companyName}</Text>
-              </Stack>
-              <Button variant="light" color="blue" component={Link} href={`/jobs/${job.id}`}>
-                Apply
-              </Button>
-            </Group>
-          </Paper>
+          <JobCard key={job.id} job={job} />
         ))}
       </Flex>
     </>

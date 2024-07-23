@@ -1,34 +1,31 @@
-import jobs from "@/app/constants/jobs.data";
-import { Button, Card, Group, SimpleGrid, Stack, Text, Title } from "@mantine/core";
-import { notFound } from "next/navigation";
-
+import { Card, Text } from "@mantine/core";
+import { Job } from "../../../../types/job";
+import axios from "@/lib/axios";
+import { JobDetailCard } from "@/components/ui/job-detail-card";
+import { getServerSession } from "next-auth";
 interface PageProps {
   params: {
     id?: string;
   };
 }
-export default function Page(props: PageProps) {
-  const job = jobs.find((job) => job.id === props.params.id);
-  if (!job) {
-    notFound();
+
+export default async function Page(props: PageProps) {
+  let job: Job | null = null;
+  const session = await getServerSession();
+  try {
+    const { data } = await axios.get<Job>(`/jobs/${props.params.id}`);
+    job = data;
+  } catch (error) {
+    console.error("An unexpected error occurred:", error);
   }
+
   return (
     <Card shadow="lg" p={30} radius="lg" withBorder>
-      <Group justify="space-between" mb={20}>
-        <Title order={3}>{job.title}</Title>
-        <Text size="sm" fw={500}>
-          {job.companyName}
-        </Text>
-      </Group>
-      <Stack>
-        <Text>{job.description}</Text>
-        <Group>
-          <Text fw={500} size="sm">
-            {job.address}, {job.city}, {job.state} {job.zipCode}
-          </Text>
-        </Group>
-        <Button>Apply</Button>
-      </Stack>
+      {job ? (
+        <JobDetailCard job={job} isLogged={!!session?.user} />
+      ) : (
+        <Text c="red">Error</Text>
+      )}
     </Card>
   );
 }
