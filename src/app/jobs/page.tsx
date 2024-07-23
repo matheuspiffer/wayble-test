@@ -9,7 +9,7 @@ export default async function Page() {
   return (
     <>
       <Title pb={34} order={1}>
-        Recommended jobs{" "}
+        Recommended Jobs
       </Title>
       <Flex direction="column" gap="lg" justify={{ sm: "center" }}>
         {jobs.map((job) => (
