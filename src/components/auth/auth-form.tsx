@@ -11,7 +11,6 @@ export function AuthForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl");
-
   const form = useForm({
     mode: "uncontrolled",
     initialValues: { email: "", password: "" },
@@ -58,7 +57,13 @@ export function AuthForm() {
           key={form.key("password")}
           {...form.getInputProps("password")}
         />
-        <Button size="md" type="submit" fullWidth mt="lg" loading={session.status === 'loading'}>
+        <Button
+          size="md"
+          type="submit"
+          fullWidth
+          mt="lg"
+          loading={session.status === "loading"}
+        >
           Log In
         </Button>
       </form>

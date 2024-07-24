@@ -2,14 +2,12 @@
 import { AppShell, Burger, Button, Flex, Menu } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [opened, { toggle }] = useDisclosure();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
-  const pathName = usePathname();
-  console.log(pathName);
   const isLogged = status === "authenticated";
 
   const logOut = async () => {
@@ -20,7 +18,12 @@ export default function Header() {
       <Flex px="lg" justify="space-between" align="center" h="100%">
         <Menu shadow="md" position="top" opened={opened} width="100%">
           <Menu.Target>
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            <Burger
+              opened={opened}
+              onClick={toggle}
+              hiddenFrom="sm"
+              size="sm"
+            />
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>Application</Menu.Label>
@@ -69,11 +72,22 @@ export default function Header() {
           Jobs
         </Button>
         {!isLogged ? (
-          <Button size="lg" radius="lg" visibleFrom="sm" onClick={() => router.push("/login")}>
+          <Button
+            size="lg"
+            radius="lg"
+            visibleFrom="sm"
+            onClick={() => router.push("/login")}
+          >
             Log In
           </Button>
         ) : (
-          <Button size="lg" radius="lg" visibleFrom="sm" variant="light" onClick={logOut}>
+          <Button
+            size="lg"
+            radius="lg"
+            visibleFrom="sm"
+            variant="light"
+            onClick={logOut}
+          >
             Log Out
           </Button>
         )}

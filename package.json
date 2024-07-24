@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
@@ -25,6 +26,7 @@
     "@mantine/tiptap": "^7.11.2",
     "@reduxjs/toolkit": "^2.2.6",
     "@tabler/icons-react": "^3.11.0",
+    "@testing-library/user-event": "^14.5.2",
     "@tiptap/extension-link": "^2.5.5",
     "@tiptap/react": "^2.5.5",
     "@tiptap/starter-kit": "^2.5.5",
@@ -36,14 +38,21 @@
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "^9.1.2",
-    "recharts": "^2.12.7"
+    "recharts": "^2.12.7",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "next-router-mock": "^0.9.13",
     "postcss": "^8.4.39",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
