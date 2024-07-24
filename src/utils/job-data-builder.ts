@@ -1,16 +1,7 @@
 import { faker } from "@faker-js/faker";
-type Props = {
-  id: string;
-  companyName: string;
-  title: string;
-  description: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-};
+import { Job } from "../../types/job";
 
-export function JobDataBuilder(props: Partial<Props>) {
+export function JobDataBuilder(props: Partial<Job>) {
   return {
     id: props.id ?? faker.string.uuid(),
     companyName: props.companyName ?? faker.company.name(),

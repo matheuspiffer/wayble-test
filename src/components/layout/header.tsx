@@ -2,12 +2,14 @@
 import { AppShell, Burger, Button, Flex, Menu } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Header() {
   const [opened, { toggle }] = useDisclosure();
   const { data: session, status } = useSession();
   const router = useRouter();
+  const pathName = usePathname();
+  console.log(pathName);
   const isLogged = status === "authenticated";
 
   const logOut = async () => {
@@ -15,18 +17,22 @@ export default function Header() {
   };
   return (
     <AppShell.Header>
-      <Flex px="lg" justify="flex-end" align="center" h="100%">
+      <Flex px="lg" justify="space-between" align="center" h="100%">
         <Menu shadow="md" position="top" opened={opened} width="100%">
           <Menu.Target>
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-            />
+            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Label>Application</Menu.Label>
+            <Menu.Item
+              component="button"
+              onClick={() => {
+                toggle();
+                router.push("/jobs");
+              }}
+            >
+              Jobs
+            </Menu.Item>
             {!isLogged ? (
               <Menu.Item
                 component="button"
@@ -50,25 +56,24 @@ export default function Header() {
             )}
           </Menu.Dropdown>
         </Menu>
+        <Button
+          style={(theme) => ({
+            backgroundColor: theme.colors.secondaryColor,
+          })}
+          size="lg"
+          radius="lg"
+          bg="secondary-color"
+          onClick={() => router.push("/jobs")}
+          visibleFrom="sm"
+        >
+          Jobs
+        </Button>
         {!isLogged ? (
-          <Button
-            size="lg"
-            radius="lg"
-            c="black"
-            visibleFrom="sm"
-            onClick={() => router.push("/login")}
-          >
+          <Button size="lg" radius="lg" visibleFrom="sm" onClick={() => router.push("/login")}>
             Log In
           </Button>
         ) : (
-          <Button
-            size="lg"
-            radius="lg"
-            c="black"
-            visibleFrom="sm"
-            variant="light"
-            onClick={logOut}
-          >
+          <Button size="lg" radius="lg" visibleFrom="sm" variant="light" onClick={logOut}>
             Log Out
           </Button>
         )}

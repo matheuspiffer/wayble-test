@@ -1,7 +1,7 @@
 import { Card, Text } from "@mantine/core";
 import { Job } from "../../../../types/job";
 import axios from "@/lib/axios";
-import { JobDetailCard } from "@/components/ui/job-detail-card";
+import { JobDetailCard } from "@/components/jobs/job-detail-card";
 import { getServerSession } from "next-auth";
 interface PageProps {
   params: {

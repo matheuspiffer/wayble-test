@@ -1,5 +1,5 @@
 import { Flex, Title } from "@mantine/core";
-import JobCard from "@/components/ui/job-card";
+import JobCard from "@/components/jobs/job-card";
 import axios from "@/lib/axios";
 import { Job } from "../../../types/job";
 

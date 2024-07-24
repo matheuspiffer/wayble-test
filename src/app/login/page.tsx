@@ -1,9 +1,5 @@
-import { AuthForm } from "@/components/auth/auth";
+import { AuthForm } from "@/components/auth/auth-form";
 
-interface LoginPageProps {
-  opened: boolean;
-  onClose?: () => void;
-}
-export default function Page(props: LoginPageProps) {
+export default function Page() {
   return <AuthForm></AuthForm>;
 }

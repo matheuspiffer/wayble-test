@@ -2,11 +2,12 @@
 import { Button, Modal, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function AuthForm() {
   const [modelOpened, { open, close }] = useDisclosure(true);
+  const session = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl");
@@ -38,6 +39,7 @@ export function AuthForm() {
         close();
         router.back();
       }}
+      centered
       title="Authentication"
     >
       <form onSubmit={form.onSubmit(onSubmit)}>
@@ -56,8 +58,8 @@ export function AuthForm() {
           key={form.key("password")}
           {...form.getInputProps("password")}
         />
-        <Button type="submit" variant="light" c="black" fullWidth mt="lg">
-          Log in
+        <Button size="md" type="submit" fullWidth mt="lg" loading={session.status === 'loading'}>
+          Log In
         </Button>
       </form>
     </Modal>
