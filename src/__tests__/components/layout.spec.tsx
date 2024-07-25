@@ -4,7 +4,7 @@ import { SessionProvider, signOut } from "next-auth/react";
 import * as mockRouter from "next-router-mock";
 
 describe("Layout component", () => {
-  it("Should render the layout with a not authenticated user", () => {
+  it("Should render the layout for an unauthenticated user", () => {
     render(
       <SessionProvider session={null}>
         <Layout>
@@ -22,7 +22,7 @@ describe("Layout component", () => {
     expect(mockRouter.default.pathname).toBe(`/login`);
   });
 
-  it("Should render the layout with an authenticated user", async () => {
+  it("Should render the layout for an authenticated user", async () => {
     render(
       <SessionProvider
         session={{

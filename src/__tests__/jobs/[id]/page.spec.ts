@@ -23,7 +23,7 @@ describe("Jobs detail Page", () => {
     expect(errorEL).toBeInTheDocument();
   });
 
-  it("Should render job detail with an not authenticated user", async () => {
+  it("Should render job detail for an unauthenticated user", async () => {
     (axios.get as jest.Mock).mockResolvedValue({ data: job });
     const page = await Page({ params: { id: job.id } });
     render(page);
@@ -42,7 +42,7 @@ describe("Jobs detail Page", () => {
     expect(mockRouter.default.asPath).toBe(`/login?callbackUrl=%2Fjobs%2F${job.id}`);
   });
 
-  it("Should render job detail with an authenticated user", async () => {
+  it("Should render job detail for an authenticated user", async () => {
     (axios.get as jest.Mock).mockResolvedValue({ data: job });
     (getServerSession as jest.Mock).mockResolvedValue({
       user: { email: "any_email", name: "any_name", id: "any_id" },
