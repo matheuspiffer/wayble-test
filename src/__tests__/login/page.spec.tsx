@@ -3,23 +3,7 @@ import { render, screen, fireEvent } from "../../testing/utils";
 import Page from "@/app/login/page";
 import { faker } from "@faker-js/faker";
 import * as mockRouter from "next-router-mock";
-import { useSearchParams } from "next/navigation";
 
-// Configuração do mock
-jest.mock("next-auth/react", () => ({
-  ...jest.requireActual("next-auth/react"),
-  signIn: jest.fn(),
-}));
-
-const useRouter = mockRouter.useRouter;
-jest.mock("next/navigation", () => ({
-  ...jest.requireActual("next-router-mock"),
-  useSearchParams: () => {
-    const router = useRouter();
-    const path = router.query;
-    return new URLSearchParams(path as never);
-  },
-}));
 describe("Login Page", () => {
   const email = faker.internet.email();
   const password = faker.internet.password();

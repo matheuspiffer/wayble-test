@@ -20,7 +20,13 @@ const config: Config = {
     "src/**/*.{js,jsx,ts,tsx}",
     "!src/**/*.d.ts",
     "!src/**/index.ts",
+    "!src/auth.ts",
+    "!src/auth.ts",
+    "!src/app/components/providers/*.tsx", //
+    "!src/app/layout.tsx",
+    "!src/app/api/auth/auth.ts",
   ],
+
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },

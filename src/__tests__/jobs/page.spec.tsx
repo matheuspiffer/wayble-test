@@ -4,15 +4,8 @@ import { JobDataBuilder } from "@/utils/job-data-builder";
 import Page from "@/app/jobs/page";
 import axios from "@/lib/axios";
 
-jest.mock("@/lib/axios"); // Mock do módulo correto
-
 describe("Jobs Page", () => {
-  const jobs = [
-    JobDataBuilder({}),
-    JobDataBuilder({}),
-    JobDataBuilder({}),
-    JobDataBuilder({}),
-  ];
+  const jobs = [JobDataBuilder({}), JobDataBuilder({}), JobDataBuilder({}), JobDataBuilder({})];
 
   beforeEach(async () => {
     (axios.get as jest.Mock).mockResolvedValue({ data: jobs });
